@@ -1,0 +1,37 @@
+{
+  "id": "scanner",
+  "kind": "service",
+  "name": "urirun-service-scanner",
+  "label": "urirun phone document scanner",
+  "defaultHost": "0.0.0.0",
+  "defaultPort": 8196,
+  "env": {
+    "host": "URIRUN_PHONE_SCANNER_HOST",
+    "port": "URIRUN_PHONE_SCANNER_PORT",
+    "tlsCert": "URIRUN_PHONE_SCANNER_TLS_CERT",
+    "tlsKey": "URIRUN_PHONE_SCANNER_TLS_KEY",
+    "interval": "URIRUN_PHONE_SCANNER_INTERVAL"
+  },
+  "routes": [
+    "dashboard://host/phone-scanner/command/start",
+    "dashboard://host/service/phone-scanner/command/restart",
+    "service://host/phone-scanner/command/restart",
+    "service://phone-scanner/command/restart",
+    "scanner://page/camera/command/scan",
+    "scanner://page/camera/command/best-pdf",
+    "scanner://page/camera/command/autonomous",
+    "scanner://host/capture/command/save"
+  ],
+  "http": {
+    "index": "/scanner",
+    "api": [
+      "/api/scanner/capture",
+      "/api/scanner/best/finish",
+      "/api/scanner/session",
+      "/api/scanner/live",
+      "/api/page/actions/poll",
+      "/api/page/actions/result",
+      "/api/uri/invoke"
+    ]
+  }
+}
