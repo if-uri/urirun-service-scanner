@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "urirun-service-scanner"
-version = "0.1.0"
+version = "0.1.1"
 description = "Standalone urirun phone document scanner service on port 8196"
 readme = "README.md"
 requires-python = ">=3.10"
