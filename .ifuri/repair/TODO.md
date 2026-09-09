@@ -1,8 +1,12 @@
-# Repair verification: doctor-agent#34
+# Repair checklist
 
-- Source issue: https://github.com/subactor/doctor-agent/issues/34
-- Correlation ID: `33155385219`
-- [x] Add the missing Makefile without removing existing validation.
-- [x] Match the networkless Doctor/OneDev build, test, and health targets.
-- [ ] Confirm the exact pull-request head in OneDev.
-- [ ] Request Validator review without automatic merge.
+Process: `repair.v1`
+Issue: `#368`
+Correlation ID: `34357541797`
+
+- [x] Reproduce the original failure
+- [x] Fix the root cause
+- [x] Add or update regression tests
+- [x] Update implementation documentation
+- [x] Produce digest-bound ticket2dsl, code2dsl, docs2dsl and service2dsl projections
+- [x] Complete every Repair TODO item
