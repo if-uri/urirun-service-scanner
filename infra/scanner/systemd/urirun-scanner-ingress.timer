@@ -1,0 +1,10 @@
+[Unit]
+Description=Restore scanner route after existing Caddy ingress reload/restart (PLF-030)
+
+[Timer]
+OnBootSec=15s
+OnUnitActiveSec=30s
+Unit=urirun-scanner-ingress.service
+
+[Install]
+WantedBy=timers.target

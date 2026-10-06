@@ -1,0 +1,10 @@
+[Unit]
+Description=Deliver new scanner PDFs to Lenovo and retry when node returns (PLF-031)
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=15s
+Unit=urirun-scanner-delivery.service
+
+[Install]
+WantedBy=timers.target
