@@ -1,0 +1,8 @@
+[Unit]
+Description=Reconcile phone scanner listener on existing Caddy ingress (PLF-030)
+After=urirun-phone-scanner-backend.service
+Requires=urirun-phone-scanner-backend.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/.config/urirun/scanner-ingress/reconcile.py

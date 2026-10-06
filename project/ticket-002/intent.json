@@ -1,0 +1,94 @@
+{
+  "schema": "new-project.intent/v3",
+  "ticket": "ticket-002",
+  "summary": "Persist scanner ingress and verified Lenovo intake deployment",
+  "workstream": "infrastructure",
+  "classification": {
+    "kind": "BUG",
+    "priority": "P1",
+    "origin": "requested"
+  },
+  "allowedPaths": [
+    "project/ticket-002/**",
+    "TODO.md",
+    "project/TICKETS.md",
+    "infra/scanner/**"
+  ],
+  "forbiddenPaths": [
+    "project/ticket-*/user-*.md"
+  ],
+  "stacks": [],
+  "dependsOn": [],
+  "conflictsWith": [],
+  "integrationTicket": null,
+  "delivery": {
+    "acceptedBaseSha": "af11d80eff890358aa2d7d0d82196f90c8c0eb39",
+    "targetBranch": "main",
+    "outcome": "Persist the deployed scanner Caddy ingress and verified Lenovo PDF/JSON intake as a reproducible infrastructure deployment with tests. Independent protected publication remains required.",
+    "nonGoals": [
+      "No changes to foreign urirun dashboard or connector source/history",
+      "No accounting assignment, source deletion or new CA",
+      "No self approval or protected registry edits"
+    ],
+    "complexity": "L",
+    "estimatedMinutes": 60,
+    "budgets": {
+      "maxImplementationFiles": 15,
+      "maxAffectedComponents": 2,
+      "maxPublicInterfaceChanges": 0,
+      "maxRuntimeDependencies": 0
+    },
+    "architecture": {
+      "status": "accepted",
+      "decision": "Scanner service owns the existing host deployment scripts and systemd configuration under infra/scanner. Reuse the existing Caddy and Lenovo urirun node.",
+      "components": [
+        {
+          "name": "scanner-runtime",
+          "paths": [
+            "infra/scanner/**"
+          ]
+        }
+      ],
+      "responsibilityChanges": false,
+      "interfaceChanges": [],
+      "dataChanges": [],
+      "ui": {
+        "impact": "none",
+        "states": [],
+        "evidence": []
+      },
+      "rollback": "Existing deployed host files preserved; source publication does not change runtime"
+    },
+    "runtimeDependencies": [],
+    "validation": [
+      {
+        "criterion": "AC-01",
+        "commands": [
+          "systemd-analyze --user verify infra/scanner/systemd/*.service infra/scanner/systemd/*.timer"
+        ],
+        "evidence": "Unit validation exit 0; source matches deployed host units with home specifiers."
+      },
+      {
+        "criterion": "AC-02",
+        "commands": [
+          "python -m unittest discover -s infra/scanner -p 'test_*.py'"
+        ],
+        "evidence": "Ten transfer, metadata and ingress safety cases pass with the existing environment and pinned metadata source."
+      },
+      {
+        "criterion": "AC-03",
+        "commands": [
+          "bash project/governance-check.sh"
+        ],
+        "evidence": "Scoped governance report retained in external recovery state."
+      },
+      {
+        "criterion": "AC-04",
+        "commands": [
+          "Protected OneDev exact-head/base verification and independent Validator publication"
+        ],
+        "evidence": "Pending protected profile admission; preflight PUBLICATION_PROFILE_MISSING is not approval."
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=Urirun phone scanner backend behind existing Caddy ingress (PLF-030)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/github/if-uri/urirun
+Environment=PYTHONUNBUFFERED=1
+Environment=URIRUN_DASHBOARD_PUBLIC_URL=https://192.168.188.212:8196
+ExecStart=%h/github/if-uri/urirun/venv/bin/urirun-service-scanner serve --http --host 127.0.0.1 --port 18196 --no-replace --project %h/github/if-uri/urirun --db %h/.urirun/host.db
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+
+[Install]
+WantedBy=default.target
